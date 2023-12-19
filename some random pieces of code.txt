@@ -1,0 +1,52 @@
+app.get('/', (request, response) => {
+    const task = request.query.task
+    if (task){
+        tasks.push(task);
+    }else{
+        response.render('home1.ejs', {tasks: tasks, msg:"Il faut remplir la case"})
+    }
+    response.render('home1.ejs', {tasks: tasks, msg:"Ajout réussi"});
+
+});
+
+---------------------------------------------------------------
+<html>
+    <head>
+        <title>Title</title>
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <h1>Todo</h1>
+        <h2>Liste des tâches</h2>
+        <ul>
+            <% for (let i = 0; i<taches.length; i++) { %>
+                <li>
+                    <%= taches[i] %> 
+                    <a href="/update/<%= ids[i]%>">Modifier</a>
+                    <a href="/delete/<%= ids[i]%>">Effacer</a>
+                </li>
+            <% } %>
+        </ul>
+        <form action="/" method="GET"> 
+            <h2>Ajouter une tâche</h2>
+            <label><%= msg %></label>
+            <p>
+                <button>Send</button> 
+                <input type="text" name="task" id="task" class="form-input">
+            </p>
+        </form>
+
+        <img src="/image/node.png" />
+
+    </body>
+</html>
+-----------------------------------------------------------------
+app.get('/deleteTask', (req, res) => {
+    const taskToDelete = req.query.task;
+    const index = tasks.indexOf(taskToDelete);
+    if (index !== -1) {
+        tasks.splice(index, 1);
+    }
+    res.redirect('/');
+});
+-------------------------------------------------------------------

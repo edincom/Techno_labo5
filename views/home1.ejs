@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Title</title>
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <h1>Todo</h1>
+        <h2>Liste des tâches</h2>
+        <ul>
+            <% for (let i = 0; i<taches.length; i++) { %>
+                <li>
+                    <%= taches[i] %> 
+                    <a href="/update/<%= ids[i]%>">Modifier</a>
+                    <a href="/delete/<%= ids[i]%>">Effacer</a>
+                </li>
+            <% } %>
+        </ul>
+        <a href="/add">Ajouter une tâche</a>
+
+        <img src="/image/node.png" />
+
+    </body>
+</html>
